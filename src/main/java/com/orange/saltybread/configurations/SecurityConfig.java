@@ -44,6 +44,7 @@ public class SecurityConfig {
                 .requestMatchers("/users/login").anonymous()
                 .requestMatchers("/email/verifications").anonymous()
                 .requestMatchers(HttpMethod.POST, "/users").anonymous()
+                .requestMatchers("/notifications").anonymous()
                 .anyRequest().authenticated()
         )
         .cors(cors -> cors.configurationSource(corsConfigurationSource())) // CORS 설정 추가

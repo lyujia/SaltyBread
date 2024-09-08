@@ -36,6 +36,7 @@ public class AddFriendService implements AddFriendUseCase {
     }
     Friend friend = new Friend(command.userId(), friendOptional.get());
     friendRepository.save(friend);
-    return new AddFriendResponse();
+    return new AddFriendResponse(friendOptional.get().getId(), friendOptional.get().getName(),
+        friendOptional.get().getEmail());
   }
 }

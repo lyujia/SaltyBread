@@ -1,5 +1,7 @@
 package com.orange.saltybread.domain.ports.usecases.friends.addFriend;
 
-public record AddFriendResponse() {
+import java.util.UUID;
+
+public record AddFriendResponse(UUID userId, String name, String email) {
 
 }
