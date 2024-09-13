@@ -7,8 +7,12 @@ services:
       - 'MARIADB_PASSWORD=1234'
       - 'MARIADB_ROOT_PASSWORD=1234'
       - 'MARIADB_USER=admin'
-    options: --health-cmd="healthcheck.sh --su-mysql --connect --innodb_initialized" --health-interval=10s --health-timeout=5s --health-retries=3
-
+    healthcheck:
+      test: [ "CMD", "healthcheck.sh", "--connect", "--innodb_initialized" ]
+      start_period: 10s
+      interval: 10s
+      timeout: 5s
+      retries: 3
   rabbitmq:
     image: 'rabbitmq:latest'
     container_name: 'rabbitmq'
