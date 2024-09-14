@@ -8,7 +8,7 @@ services:
     environment:
       - DOCKER_HOST=unix:///var/run/docker.sock
     volumes:
-      - ./docker/jenkins/var/jenkins_home:/var/jenkins_home
+      - ./docker/volumes/jenkins/var/jenkins_home:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
   portainer:
     image: 'portainer/portainer-ce:latest'
@@ -16,7 +16,7 @@ services:
     privileged: true
     restart: always
     volumes:
-      - ./docker/portainer/data:/data
+      - ./docker/volumes/portainer/data:/data
       - /var/run/docker.sock:/var/run/docker.sock
 
   proxy:
