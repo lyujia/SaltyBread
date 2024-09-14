@@ -13,16 +13,21 @@ services:
       interval: 10s
       timeout: 5s
       retries: 3
+    networks:
+      - saltybread
   rabbitmq:
     image: 'rabbitmq:latest'
     container_name: 'rabbitmq'
     environment:
       - 'RABBITMQ_DEFAULT_PASS=secret'
       - 'RABBITMQ_DEFAULT_USER=myuser'
-
+    networks:
+      - saltybread
   redis:
     image: 'redis:latest'
     container_name: 'redis'
+    networks:
+      - saltybread
 
   backend:
     build:
@@ -36,3 +41,8 @@ services:
         condition: service_started
       redis:
         condition: service_started
+    networks:
+      - saltybread
+networks:
+  saltybread:
+    external: true
