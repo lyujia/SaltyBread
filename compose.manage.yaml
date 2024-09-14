@@ -11,7 +11,7 @@ services:
       - ./docker/volumes/jenkins/var/jenkins_home:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
-      - saltybread
+      - network
 
   portainer:
     image: 'portainer/portainer-ce:latest'
@@ -22,7 +22,7 @@ services:
       - ./docker/volumes/portainer/data:/data
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
-      - saltybread
+      - network
 
   proxy:
     image: nginx:latest
@@ -38,7 +38,8 @@ services:
       - jenkins
       - portainer
     networks:
-      - saltybread
+      - network
 networks:
-  saltybread:
+  network:
+    name: saltybread
     driver: bridge
