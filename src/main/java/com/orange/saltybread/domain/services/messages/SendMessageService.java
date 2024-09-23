@@ -43,7 +43,7 @@ public class SendMessageService implements SendMessageUseCase {
             throw new ChatRoomNotFoundException();
         }
         List<UUID> userIds = optionalChatRoom.get().getMappings().stream().filter(
-                        m -> m.getUser().getId().equals(command.senderId())
+                        m -> !m.getUser().getId().equals(command.senderId())
                 ).map(m ->
                         m.getUser().getId()
                 )
