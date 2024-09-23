@@ -42,7 +42,11 @@ public class SendMessageService implements SendMessageUseCase {
         if (optionalChatRoom.isEmpty()) {
             throw new ChatRoomNotFoundException();
         }
-        List<UUID> userIds = optionalChatRoom.get().getMappings().stream().map(m -> m.getUser().getId())
+        List<UUID> userIds = optionalChatRoom.get().getMappings().stream().filter(
+                        m -> m.getUser().getId().equals(command.senderId())
+                ).map(m ->
+                        m.getUser().getId()
+                )
                 .toList();
         Message message = new Message(command.message(), optionalSender.get(), command.roomId());
         messageRepository.save(message);
